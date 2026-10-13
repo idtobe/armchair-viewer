@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compact Lounge Armchair – 3D viewer</title>
+<meta name="description" content="Interactive 3D viewer and AR preview of an armchair.">
+
+<!-- Pinned version. If the CDN ever 404s, check the latest release at modelviewer.dev -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+<style>
+  :root {
+    --bg: #ebebeb;          /* matches the studio-render background */
+    --ink: #1f1d1b;
+    --muted: #6b6661;
+    --walnut: #5a3a28;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #2a2826; --ink: #f1eee9; --muted: #a39d95; --walnut: #b98a64; }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  header {
+    padding: 20px 24px 0;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  header p {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  model-viewer {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    background: transparent;
+    --poster-color: transparent;
+    --progress-bar-color: var(--walnut);
+    --progress-mask: transparent;
+  }
+
+  .ar-button {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    padding: 14px 26px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--walnut);
+    color: #fff;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .ar-button:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  footer {
+    padding: 12px 24px 18px;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  footer a { color: var(--ink); text-underline-offset: 3px; }
+  footer a:focus-visible { outline: 2px solid var(--walnut); outline-offset: 3px; }
+</style>
+</head>
+
+<body>
+  <header>
+    <h1>Compact Lounge Armchair</h1>
+    <p>Drag to rotate, pinch or scroll to zoom.</p>
+  </header>
+
+  <model-viewer
+    src="armchair.glb"
+    alt="Compact lounge armchair with off-white bouclé upholstery and three walnut legs"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    ar-scale="fixed"
+    camera-controls
+    touch-action="pan-y"
+    auto-rotate
+    auto-rotate-delay="4000"
+    camera-orbit="35deg 75deg auto"
+    shadow-intensity="1"
+    shadow-softness="1"
+    exposure="1"
+    environment-image="neutral"
+    loading="eager"
+    reveal="auto">
+    <!-- Optional: add poster="poster.webp" above for an instant first frame -->
+    <button slot="ar-button" class="ar-button">View in your room</button>
+  </model-viewer>
+
+  <footer>
+    <span>3D by Roberto Reyes</span>
+    <a href="https://www.behance.net/robertorp">Full project on Behance</a>
+  </footer>
+</body>
+</html>
